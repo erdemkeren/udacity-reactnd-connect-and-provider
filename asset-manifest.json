@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/udacity-reactnd-connect-and-provider/static/css/main.5f6103be.chunk.css",
+    "main.js": "/udacity-reactnd-connect-and-provider/static/js/main.49cfc854.chunk.js",
+    "main.js.map": "/udacity-reactnd-connect-and-provider/static/js/main.49cfc854.chunk.js.map",
+    "runtime~main.js": "/udacity-reactnd-connect-and-provider/static/js/runtime~main.dc475b40.js",
+    "runtime~main.js.map": "/udacity-reactnd-connect-and-provider/static/js/runtime~main.dc475b40.js.map",
+    "static/js/2.fc7ebe1c.chunk.js": "/udacity-reactnd-connect-and-provider/static/js/2.fc7ebe1c.chunk.js",
+    "static/js/2.fc7ebe1c.chunk.js.map": "/udacity-reactnd-connect-and-provider/static/js/2.fc7ebe1c.chunk.js.map",
+    "index.html": "/udacity-reactnd-connect-and-provider/index.html",
+    "precache-manifest.0f9db0d8bfea7d59f318d4801fe4e0d9.js": "/udacity-reactnd-connect-and-provider/precache-manifest.0f9db0d8bfea7d59f318d4801fe4e0d9.js",
+    "service-worker.js": "/udacity-reactnd-connect-and-provider/service-worker.js",
+    "static/css/main.5f6103be.chunk.css.map": "/udacity-reactnd-connect-and-provider/static/css/main.5f6103be.chunk.css.map"
+  }
+}
