@@ -1,51 +1,24 @@
 import './App.css'
 import Sider from './components/Sider'
-import React, { useState } from 'react'
+import React  from 'react'
 import LessonPage from './pages/Lesson'
 import LessonProgress from './components/LessonProgress'
+import { connect } from 'react-redux'
+import {
+    lessonCompleted,
+    activeLessonChanged
+} from './actions'
+import { bindActionCreators } from 'redux'
 
-const initialLessonListState = [{
-    id: 1,
-    title: 'Lesson 1',
-    completed: true,
-    type: 'content',
-    content: (
-        <>
-            <p>React rocks!</p>
-        </>
-    )
-}, {
-    id: 2,
-    title: 'Quiz 1',
-    completed: false,
-    type: 'quiz',
-    content: (
-        <>
-            <p>What rocks?</p>
-            <ul>
-                <li>React</li>
-                <li>Angular</li>
-                <li>Ember</li>
-                <li>Vue</li>
-            </ul>
-        </>
-    )
-}, {
-    id: 3,
-    title: 'Assessment 1',
-    completed: false,
-    type: 'assessment',
-    content: (
-        <>
-            <p>Find a library that rocks.</p>
-            <em>Deadline: One week</em>
-        </>
-    )
-}]
-
-function App() {
-    const [lessonList, setLessonList] = useState(initialLessonListState)
-    const [activeLessonId, setActiveLessonId] = useState(1)
+function App({
+    lessonList,
+    activeLessonId,
+    prevLessonExists,
+    nextLessonExists,
+    lessonCompleted,
+    activeLessonChanged
+}) {
+    /*
     const onLessonCompletion = id => setLessonList(
         lessonList.map(i => ({ ...i, completed: id === i.id || i.completed }))
     )
@@ -55,6 +28,16 @@ function App() {
     const goToPreviousLesson = () => setActiveLessonId(
         lessonList[lessonList.findIndex(o => o.id === activeLessonId)-1].id
     )
+    */
+
+    const setActiveLessonId = id => activeLessonChanged(id)
+    const goToPreviousLesson = () => activeLessonChanged(
+        lessonList[lessonList.findIndex(o => o.id === activeLessonId)-1].id
+    )
+    const goToNextLesson = () => activeLessonChanged(
+        lessonList[lessonList.findIndex(o => o.id === activeLessonId)+1].id
+    )
+    const onLessonCompletion = id => lessonCompleted(id)
 
     return (
         <div className="App">
@@ -82,8 +65,8 @@ function App() {
 
             <LessonPage
                 activeLesson={lessonList.find(o => o.id === activeLessonId)}
-                prevLessonExists={lessonList[0].id !== activeLessonId}
-                nextLessonExists={lessonList[lessonList.length-1].id !== activeLessonId}
+                prevLessonExists={prevLessonExists}
+                nextLessonExists={nextLessonExists}
                 goToPreviousLesson={goToPreviousLesson}
                 onLessonCompletion={onLessonCompletion}
                 goToNextLesson={goToNextLesson}
@@ -92,4 +75,18 @@ function App() {
     )
 }
 
-export default App
+const mapStateToProps = ({ lessonList, activeLessonId }) => ({
+    lessonList,
+    activeLessonId,
+    prevLessonExists: lessonList[0].id !== activeLessonId,
+    nextLessonExists: lessonList[lessonList.length-1].id !== activeLessonId,
+})
+
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatch,
+        ...bindActionCreators({ lessonCompleted, activeLessonChanged }, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
